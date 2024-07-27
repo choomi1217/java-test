@@ -3,15 +3,14 @@ package cho.ym.javatest.step1;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 
-class StudyTest3 {
+class StudyTestTest3 {
 
-    private final Study study = new Study(10);
+    private final StudyTest studyTest = new StudyTest(10);
 
     @Test
     @DisplayName("Tagging1")

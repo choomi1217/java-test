@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 
-class StudyTest2 {
+class StudyTestTest2 {
 
-    private final Study study = new Study(10);
+    private final StudyTest studyTest = new StudyTest(10);
 
     @Test
     @DisplayName("assumeTrue 테스트")
@@ -26,13 +26,13 @@ class StudyTest2 {
 
         assumingThat("LOCAL".equalsIgnoreCase(env), () -> {
             System.out.println("LOCAL");
-            Study actual = new Study(100);
+            StudyTest actual = new StudyTest(100);
             assertEquals(StudyStatus.DRAFT, actual.getStatus());
         });
 
         assumingThat("PROD".equalsIgnoreCase(env), () -> {
             System.out.println("PROD");
-            Study actual = new Study(10);
+            StudyTest actual = new StudyTest(10);
             assertEquals(StudyStatus.DRAFT, actual.getStatus());
         });
     }

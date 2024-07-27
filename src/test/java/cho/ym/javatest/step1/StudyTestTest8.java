@@ -3,9 +3,13 @@ package cho.ym.javatest.step1;
 import cho.ym.javatest.step1.extension.FindSlowTestExtension;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
-@ExtendWith(FindSlowTestExtension.class)
-public class StudyTest8 {
+//@ExtendWith(FindSlowTestExtension.class)
+public class StudyTestTest8 {
+
+    @RegisterExtension
+    static FindSlowTestExtension findSlowTestExtension = new FindSlowTestExtension(1000L);
 
     @Test
     void create() throws InterruptedException {

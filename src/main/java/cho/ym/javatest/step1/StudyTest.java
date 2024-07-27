@@ -1,17 +1,17 @@
 package cho.ym.javatest.step1;
 
-public class Study {
+public class StudyTest {
     private StudyStatus status = StudyStatus.DRAFT;
 
     private int limit;
     private String name;
 
-    public Study(int limit, String name) {
+    public StudyTest(int limit, String name) {
         this.limit = limit;
         this.name = name;
     }
 
-    public Study(int limit) {
+    public StudyTest(int limit) {
         if (limit < 0) {
             throw new IllegalArgumentException("limit은 0보다 커야 한다.");
         }

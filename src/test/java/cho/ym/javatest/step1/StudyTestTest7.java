@@ -4,7 +4,7 @@ import org.junit.jupiter.api.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class StudyTest7 {
+public class StudyTestTest7 {
 
     int value = 0;
 

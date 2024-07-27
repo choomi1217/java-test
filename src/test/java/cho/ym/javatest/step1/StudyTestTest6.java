@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class StudyTest6 {
+public class StudyTestTest6 {
 
         @Test
         void create() {
-            Study study = new Study(10);
+            StudyTest studyTest = new StudyTest(10);
             System.out.println("create1 " + this);
         }
 

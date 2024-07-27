@@ -4,9 +4,9 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class StudyTest4 {
+class StudyTestTest4 {
 
-    private final Study study = new Study(10);
+    private final StudyTest studyTest = new StudyTest(10);
 
     @RepeatedTest(10)
     void repeatTest1() {
