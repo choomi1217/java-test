@@ -1,5 +1,7 @@
 package cho.ym.javatest.step1;
 
+import cho.ym.javatest.study.Study;
+import cho.ym.javatest.study.StudyStatus;
 import org.junit.jupiter.api.*;
 
 import java.time.Duration;
@@ -11,26 +13,26 @@ class StudyTestTest1 {
 
     @Test
     void test1_underscore_replaced_by_blank() {
-        StudyTest studyTest = new StudyTest(10);
+        Study studyTest = new Study(10);
         assertAll(
                 () -> assertEquals(StudyStatus.DRAFT, studyTest.getStatus(), () -> "스터디를 처음 만들면 상태값이 DRAFT 여야 한다."),
                 () -> assertSame(StudyStatus.DRAFT, studyTest.getStatus(), () -> "스터디를 처음 만들면 상태값이 DRAFT 여야 한다."),
                 () -> assertTrue(studyTest.getLimit() > 0, () -> "스터디 최대 참석 인원은 0보다 커야 한다.")
         );
-        assertThrows(IllegalArgumentException.class, () -> new StudyTest(-10));
+        assertThrows(IllegalArgumentException.class, () -> new Study(-10));
     }
 
     @Test
     @DisplayName("테스트 - 2 입니다. 🥰")
     void test2() {
         assertTimeout(Duration.ofMillis(100), () -> {
-            new StudyTest(10);
+            new Study(10);
             //Thread.sleep(300); // 100ms 보다 300ms가 걸리면 에러 발생
         });
 
         // preemptively : 100ms가 지나면 즉각 중단
         assertTimeoutPreemptively(Duration.ofMillis(100), () -> {
-            new StudyTest(10);
+            new Study(10);
             //Thread.sleep(300);
         });
         System.out.println("test2");

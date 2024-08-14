@@ -1,5 +1,7 @@
 package cho.ym.javatest.step1;
 
+import cho.ym.javatest.study.Study;
+import cho.ym.javatest.study.StudyStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.*;
@@ -10,7 +12,7 @@ import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 class StudyTestTest2 {
 
-    private final StudyTest studyTest = new StudyTest(10);
+    private final Study studyTest = new Study(10);
 
     @Test
     @DisplayName("assumeTrue 테스트")
@@ -26,13 +28,13 @@ class StudyTestTest2 {
 
         assumingThat("LOCAL".equalsIgnoreCase(env), () -> {
             System.out.println("LOCAL");
-            StudyTest actual = new StudyTest(100);
+            Study actual = new Study(100);
             assertEquals(StudyStatus.DRAFT, actual.getStatus());
         });
 
         assumingThat("PROD".equalsIgnoreCase(env), () -> {
             System.out.println("PROD");
-            StudyTest actual = new StudyTest(10);
+            Study actual = new Study(10);
             assertEquals(StudyStatus.DRAFT, actual.getStatus());
         });
     }
