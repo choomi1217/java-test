@@ -1,5 +1,6 @@
 package cho.ym.javatest.step1;
 
+import cho.ym.javatest.study.Study;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -8,7 +9,7 @@ public class StudyTestTest6 {
 
         @Test
         void create() {
-            StudyTest studyTest = new StudyTest(10);
+            Study studyTest = new Study(10);
             System.out.println("create1 " + this);
         }
 

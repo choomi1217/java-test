@@ -11,8 +11,6 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 public class Study {
 
@@ -43,7 +41,31 @@ public class Study {
 
     }
 
-    public int getLimit() {
-        return this.limitCount;
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public StudyStatus getStatus() {
+        return status;
+    }
+
+    public int getLimitCount() {
+        return limitCount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDateTime getOpenedDateTime() {
+        return openedDateTime;
+    }
+
+    public Long getOwnerId() {
+        return ownerId;
     }
 }

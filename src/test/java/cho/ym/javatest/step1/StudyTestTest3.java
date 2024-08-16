@@ -1,5 +1,6 @@
 package cho.ym.javatest.step1;
 
+import cho.ym.javatest.study.Study;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 class StudyTestTest3 {
 
-    private final StudyTest studyTest = new StudyTest(10);
+    private final Study studyTest = new Study(10);
 
     @Test
     @DisplayName("Tagging1")

@@ -4,10 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
 public class StudyController {
 
-    final StudyRepository repository;
+    private final StudyRepository repository;
+
+    public StudyController(StudyRepository repository) {
+        this.repository = repository;
+    }
 
     @GetMapping("/study/{id}")
     public Study getStudy(@PathVariable Long id) {

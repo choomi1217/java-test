@@ -1,12 +1,13 @@
 package cho.ym.javatest.step1;
 
+import cho.ym.javatest.study.Study;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class StudyTestTest4 {
 
-    private final StudyTest studyTest = new StudyTest(10);
+    private final Study studyTest = new Study(10);
 
     @RepeatedTest(10)
     void repeatTest1() {
