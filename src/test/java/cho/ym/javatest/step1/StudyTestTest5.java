@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class StudyTest5 {
+class StudyTestTest5 {
 
     private final Study Study = new Study(10);
 

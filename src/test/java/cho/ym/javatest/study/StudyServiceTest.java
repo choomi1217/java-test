@@ -2,12 +2,22 @@ package cho.ym.javatest.study;
 
 import cho.ym.javatest.member.Member;
 import cho.ym.javatest.member.MemberService;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.util.TestPropertyValues;
+import org.springframework.context.ApplicationContextInitializer;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.Optional;
 
@@ -18,10 +28,31 @@ import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
+@Testcontainers
+@ContextConfiguration(initializers = StudyServiceTest.ContainerPropertyInitializer.class)
 class StudyServiceTest {
 
     @Mock
     MemberService memberService;
+
+    @Container
+    static PostgreSQLContainer postgreSqlContainer = new PostgreSQLContainer()
+            .withDatabaseName("studytest");
+
+    @Container
+    static GenericContainer genericContainer = new GenericContainer("my-generic-image")
+            .withEnv("A", "B"); // 환경변수 설정
+
+    @BeforeAll
+    static void beforeAll() {
+        postgreSqlContainer.start();
+        System.out.println(postgreSqlContainer.getJdbcUrl());
+    }
+
+    @AfterAll
+    static void afterAll() {
+        postgreSqlContainer.stop();
+    }
 
     @Test
     void creatStudyService() {
@@ -83,5 +114,15 @@ class StudyServiceTest {
         assertEquals(StudyStatus.OPENED, study.getStatus());
         assertNotNull(study.getOpenedDateTime());
         then(memberService).should().notify(study);
+    }
+
+    static class ContainerPropertyInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+
+        @Override
+        public void initialize(ConfigurableApplicationContext applicationContext) {
+            TestPropertyValues.of(
+                    "container.port=" + postgreSqlContainer.getMappedPort(5432)
+            ).applyTo(applicationContext.getEnvironment());
+        }
     }
 }
