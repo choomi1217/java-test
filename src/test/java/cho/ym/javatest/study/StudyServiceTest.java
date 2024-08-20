@@ -2,6 +2,7 @@ package cho.ym.javatest.study;
 
 import cho.ym.javatest.member.Member;
 import cho.ym.javatest.member.MemberService;
+import org.junit.ClassRule;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -10,15 +11,20 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.io.File;
+import java.time.Duration;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -43,6 +49,17 @@ class StudyServiceTest {
     static GenericContainer genericContainer = new GenericContainer("my-generic-image")
             .withEnv("A", "B"); // 환경변수 설정
 
+    @Container
+    static DockerComposeContainer composeContainer = new DockerComposeContainer(new File("docker-compose.yml"))
+            .withExposedService("service", 8080);
+
+    @ClassRule
+    public static DockerComposeContainer container = new DockerComposeContainer(new File("docker-compose.yml"))
+            .withExposedService("service", 8080, Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(30)));
+
+    @Value("${container.port}")
+    private int port;
+
     @BeforeAll
     static void beforeAll() {
         postgreSqlContainer.start();
@@ -56,6 +73,9 @@ class StudyServiceTest {
 
     @Test
     void creatStudyService() {
+
+        System.out.println(port);
+
         StudyRepository studyRepository = mock(StudyRepository.class);
         StudyService studyService = new StudyService(memberService, studyRepository);
 
